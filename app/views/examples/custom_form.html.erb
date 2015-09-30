@@ -1,0 +1,92 @@
+<%= form_tag('/examples/custom_checkout', id: 'payment-form') do %>
+
+  <p>The customer fields can NOT be passed to braintree via braintree attribute. I pass these params to braintree
+    in the controller via a call to create.</p>
+
+  <p>It's also worth noting fields with braintree attributes do not get sent as params.</p>
+
+  <%= field_set_tag('Details (customer object)') do %>
+    <%= label_tag('first_name') %>
+    <%= text_field_tag('customer[first_name]', 'John-2') %><br/>
+
+    <%= label_tag('last_name') %>
+    <%= text_field_tag('customer[last_name]', 'Smith-2') %><br/>
+
+    <%= label_tag('company') %>
+    <%= text_field_tag('customer[company]', 'Cloud Factory') %><br/>
+
+    <%= label_tag('email') %>
+    <%= text_field_tag('customer[email]', 'johncloud@gmail.com') %><br/>
+
+    <%= label_tag('phone') %>
+    <%= text_field_tag('customer[phone]', '555-555-5555') %><br/>
+
+    <%= label_tag('fax') %>
+    <%= text_field_tag('customer[fax]', '555-555-5555') %><br/>
+
+    <%= label_tag('website') %>
+    <%= text_field_tag('customer[website]', 'www.google.com') %><br/>
+  <% end %>
+
+
+  <%= field_set_tag('Payment Methods (payment method object)') do %>
+    <%= label_tag('cardholder_name') %>
+    <%= text_field_tag('cardholder_name', 'John D. Smith', 'data-braintree-name' => 'cardholder_name') %><br/>
+
+    <!-- note name is nil, so this param won't be sent to our servers -->
+    <%= label_tag('number') %>
+    <%= text_field_tag(nil, '6011111111111117', 'data-braintree-name' => 'number') %>
+    <span>note: make sure there is no name attribute on this field or you will have to be PCI compliant</span><br/>
+
+    <%= label_tag('expiration_month') %>
+    <%= select_tag('expiration_month', options_for_select(['07', '08']), 'data-braintree-name' => 'expiration_month') %>
+    <span>note: you can use expiration_date instead</span><br/>
+
+    <%= label_tag('expiration_year') %>
+    <%= select_tag('expiration_year', options_for_select(['2018', '2017']), 'data-braintree-name' => 'expiration_year') %><br/>
+
+  <% end %>
+
+
+  <%= field_set_tag('Addresses (address object)') do %>
+    <%= label_tag('first_name') %>
+    <%= text_field_tag('first_name', 'John-1', 'data-braintree-name' => 'first_name') %><br/>
+
+    <%= label_tag('last_name') %>
+    <%= text_field_tag('last_name', 'Smith-1', 'data-braintree-name' => 'last_name') %><br/>
+
+    <%= label_tag('company') %>
+    <%= text_field_tag('company', 'Banana Farm', 'data-braintree-name' => 'company') %><br/>
+
+    <%= label_tag('street_address') %>
+    <%= text_field_tag('street_address', '123 Main Street', 'data-braintree-name' => 'street_address') %><br/>
+
+    <%= label_tag('extended_address') %>
+    <%= text_field_tag('extended_address', 'Apt. 1', 'data-braintree-name' => 'extended_address') %><br/>
+
+    <%= label_tag('locality') %>
+    <%= text_field_tag('locality', 'Arlington', 'data-braintree-name' => 'locality') %><br/>
+
+    <%= label_tag('region') %>
+    <%= text_field_tag('region', 'VA', 'data-braintree-name' => 'region') %><br/>
+
+    <%= label_tag('postal_code') %>
+    <%= text_field_tag('postal_code', '22203', 'data-braintree-name' => 'postal_code') %><br/>
+
+    <!-- for some reason the only address field you can't do as country_code_alpha2 -->
+    <%= label_tag('country_name') %>
+    <%= text_field_tag('country_name', 'United States of America', 'data-braintree-name' => 'country_name') %>
+    <span>note: this is country name, not country_code_alpha2 as you might expect, country_code_alpha2 does not work</span><br/>
+  <% end %>
+
+  <%= submit_tag("Checkout") %>
+
+<% end %>
+
+<script src="https://js.braintreegateway.com/v2/braintree.js"></script>
+<script>
+
+  braintree.setup("<%= @client_token %>", "custom", {
+    id: "payment-form"
+  });
+</script>

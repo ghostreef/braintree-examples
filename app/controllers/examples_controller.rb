@@ -13,4 +13,17 @@ class ExamplesController < ApplicationController
         payment_method_nonce: nonce
     )
   end
+
+  def custom_form
+    @client_token = Braintree::ClientToken.generate
+  end
+
+  def custom_checkout
+
+    raise params.inspect
+    nonce = params[:payment_method_nonce]
+    customer = params[:customer]
+    @result = Braintree::Customer.create({payment_method_nonce: nonce}.merge(customer))
+  end
+
 end
