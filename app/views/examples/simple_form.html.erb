@@ -1,0 +1,16 @@
+<p>Test credit card numbers:</p>
+<p>4111 1111 1111 1111</p>
+<p>6011111111111117</p>
+
+<%= form_tag('/examples/simple_checkout') do %>
+  <div id="payment-form"></div>
+  <%= submit_tag("Pay $100") %>
+<% end %>
+
+<script src="https://js.braintreegateway.com/v2/braintree.js"></script>
+<script>
+
+  braintree.setup("<%= @client_token %>", "dropin", {
+    container: "payment-form"
+  });
+</script>
