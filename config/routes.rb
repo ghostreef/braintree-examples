@@ -4,4 +4,6 @@ Rails.application.routes.draw do
 
   get 'examples/custom_form'
   post 'examples/custom_checkout'
+
+  root 'examples#index'
 end
