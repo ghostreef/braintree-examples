@@ -1,0 +1,12 @@
+<p><%= @result.inspect %></p>
+<% console %>
+<% if @result.success? %>
+  <p>Yay! Success.</p>
+<% else %>
+  <p>Errors: <%= @result.errors %></p>
+  <p>Message: <%= @result.message %></p>
+<% end %>
+
+<p>You should see something like this in braintree. You can see a list of customers under the vault tab.</p>
+<%= image_tag('should.png') %>
+
