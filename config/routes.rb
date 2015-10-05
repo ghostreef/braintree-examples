@@ -6,4 +6,6 @@ Rails.application.routes.draw do
   post 'examples/custom_checkout'
 
   root 'examples#index'
+
+  resources :customers
 end
