@@ -9,13 +9,13 @@
     </ul>
   <% end %>
 
-  <%= f.input :first_name, input_html: { value: Faker::Name.first_name } %>
-  <%= f.input :last_name, input_html: { value: Faker::Name.last_name } %>
-  <%= f.input :company, input_html: { value: Faker::Company.name } %>
-  <%= f.input :email, input_html: { value: Faker::Internet.email } %>
-  <%= f.input :phone, input_html: { value: '555-555-5555' } %>
-  <%= f.input :fax, input_html: { value: '555-555-5555' } %>
-  <%= f.input :website, input_html: { value: 'www.google.com' } %>
+  <%= f.input :first_name, input_html: { value: @customer.first_name || Faker::Name.first_name } %>
+  <%= f.input :last_name, input_html: { value: @customer.last_name || Faker::Name.last_name } %>
+  <%= f.input :company, input_html: { value: @customer.company|| Faker::Company.name } %>
+  <%= f.input :email, input_html: { value: @customer.email || Faker::Internet.email } %>
+  <%= f.input :phone, input_html: { value: @customer.phone || '555-555-5555' } %>
+  <%= f.input :fax, input_html: { value: @customer.fax || '555-555-5555' } %>
+  <%= f.input :website, input_html: { value: @customer.website || 'www.google.com' } %>
 
   <div>
     <% if current_page?(new_customer_path) %>
