@@ -1,0 +1,31 @@
+<%= title "Customer - #{@customer.id}" %>
+<h3><%= "Customer - #{@customer.id}" %></h3>
+
+<dl>
+  <dt>id</dt>
+  <dd><%= @customer.id%></dd>
+
+  <dt>first_name</dt>
+  <dd><%= @customer.first_name%></dd>
+
+  <dt>last_name</dt>
+  <dd><%= @customer.last_name%></dd>
+
+  <dt>company</dt>
+  <dd><%= @customer.company%></dd>
+
+  <dt>email</dt>
+  <dd><%= @customer.email%></dd>
+
+  <dt>phone</dt>
+  <dd><%= @customer.phone%></dd>
+
+  <dt>fax</dt>
+  <dd><%= @customer.fax%></dd>
+
+  <dt>website</dt>
+  <dd><%= @customer.website%></dd>
+</dl>
+
+<%= link_to 'Edit', edit_customer_path %>
+<%= link_to 'Back', customers_path %>

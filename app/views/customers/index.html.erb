@@ -1,0 +1,38 @@
+<%= title 'Customers' %>
+<h3>Customers</h3>
+
+<%= link_to 'New Customer', new_customer_path %>
+<table>
+  <thead>
+  <tr>
+    <th>id</th>
+    <th>first_name</th>
+    <th>last_name</th>
+    <th>company</th>
+    <th>email</th>
+    <th>phone</th>
+    <th>fax</th>
+    <th>website</th>
+    <th>&nbsp;</th>
+    <th>&nbsp;</th>
+    <th>&nbsp;</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @customers.each do |customer| %>
+    <tr>
+      <td><%= customer.id %></td>
+      <td><%= customer.first_name %></td>
+      <td><%= customer.last_name %></td>
+      <td><%= customer.company %></td>
+      <td><%= customer.email %></td>
+      <td><%= customer.phone %></td>
+      <td><%= customer.fax %></td>
+      <td><%= customer.website %></td>
+      <td><%= link_to('show',customer_path(customer)) %></td>
+      <td><%= link_to('edit', edit_customer_path(customer)) %></td>
+      <td><%= link_to('delete', customer_path(customer), method: :delete, data: { confirm: 'Are you sure?' } )%></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
