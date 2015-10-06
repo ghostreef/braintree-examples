@@ -18,7 +18,9 @@
   <%= f.input :website, input_html: { value: 'www.google.com' } %>
 
   <div>
-    <%= label_tag(:add_to_braintree, "Also store customer in braintree?") %><%= check_box_tag(:add_to_braintree, '1', true) %>
+    <% if current_page?(new_customer_path) %>
+      <%= label_tag(:add_to_braintree, 'Also store customer in braintree?') %><%= check_box_tag(:add_to_braintree, '1', true) %>
+    <% end %>
   </div>
 
   <%= f.submit %>

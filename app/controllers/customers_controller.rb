@@ -18,7 +18,21 @@ class CustomersController < ApplicationController
     @customer = Customer.new(customer_params)
 
     if @customer.save
-      redirect_to @customer, notice: 'Customer was successfully created.'
+      redirect_to @customer, notice: 'Customer was successfully created locally. '
+
+      # there's more than one way to do this, I went for adding customer locally then creating in
+      # braintree, having both records use same id, you could of course flip this or group the ifs differently
+      # the braintree success result also returns the customer
+
+      if params[:add_to_braintree] == '1'
+        @result = Braintree::Customer.create(customer_params.merge({id: @customer.id}))
+        if @result.success?
+          flash[:notice] += 'Customer was successfully created in braintree.'
+        else
+          flash[:notice] += 'Failed to created in braintree.'
+        end
+      end
+
     else
       flash[:error] = 'Failed to create customer.'
       render :new
