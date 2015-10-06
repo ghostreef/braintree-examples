@@ -47,7 +47,16 @@ class CustomersController < ApplicationController
 
   def update
     if @customer.update(customer_params)
-      redirect_to @customer, notice: 'Customer was successfully updated.'
+      redirect_to @customer, notice: 'Customer was successfully updated locally. '
+
+      if @customer.braintree_sync
+        @result = Braintree::Customer.update(@customer.id, customer_params)
+        if @result.success?
+          flash[:notice] += 'Customer was successfully updated in braintree.'
+        else
+          flash[:notice] += 'Failed to created in braintree.'
+        end
+      end
     else
       flash[:error] = 'Failed to update customer.'
       render :edit
@@ -56,10 +65,19 @@ class CustomersController < ApplicationController
 
   def destroy
     if @customer.destroy
-      redirect_to :index, notice: 'Customer was successfully destroyed.'
+      redirect_to customers_path, notice: 'Customer was successfully deleted locally. '
+
+      if @customer.braintree_sync
+        @result = Braintree::Customer.delete(@customer.id)
+        if @result.success?
+          flash[:notice] += 'Customer was successfully deleted in braintree.'
+        else
+          flash[:notice] += 'Failed to delete in braintree.'
+        end
+      end
     else
-      flash[:error] = 'Failed to destroy customer.'
-      redirect_to :index
+      flash[:error] = 'Failed to delete customer.'
+      redirect_to customers_path
     end
   end
 
