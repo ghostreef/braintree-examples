@@ -1,4 +1,4 @@
-<%= simple_form_for(@customer) do |f| %>
+<%= simple_form_for(@customer, html: {id: 'customer_form'}) do |f| %>
 
   <% if @customer.errors.any? %>
     <p><%= pluralize(@customer.errors.count, 'error') %> prohibited this customer from being saved:</p>
@@ -9,13 +9,17 @@
     </ul>
   <% end %>
 
-  <%= f.input :first_name %>
-  <%= f.input :last_name %>
-  <%= f.input :company %>
-  <%= f.input :email %>
-  <%= f.input :phone %>
-  <%= f.input :fax %>
-  <%= f.input :website %>
+  <%= f.input :first_name, input_html: { value: Faker::Name.first_name } %>
+  <%= f.input :last_name, input_html: { value: Faker::Name.last_name } %>
+  <%= f.input :company, input_html: { value: Faker::Company.name } %>
+  <%= f.input :email, input_html: { value: Faker::Internet.email } %>
+  <%= f.input :phone, input_html: { value: '555-555-5555' } %>
+  <%= f.input :fax, input_html: { value: '555-555-5555' } %>
+  <%= f.input :website, input_html: { value: 'www.google.com' } %>
+
+  <div>
+    <%= label_tag(:add_to_braintree, "Also store customer in braintree?") %><%= check_box_tag(:add_to_braintree, '1', true) %>
+  </div>
 
   <%= f.submit %>
 <% end %>
