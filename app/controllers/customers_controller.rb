@@ -28,6 +28,8 @@ class CustomersController < ApplicationController
         @result = Braintree::Customer.create(customer_params.merge({id: @customer.id}))
         if @result.success?
           flash[:notice] += 'Customer was successfully created in braintree.'
+          @customer.braintree_sync = true
+          @customer.save
         else
           flash[:notice] += 'Failed to created in braintree.'
         end
