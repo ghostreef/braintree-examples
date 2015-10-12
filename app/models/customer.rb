@@ -4,6 +4,10 @@ class Customer < ActiveRecord::Base
 
   after_initialize :set_defaults, unless: :persisted?
 
+  has_many :credit_cards
+
+  accepts_nested_attributes_for :credit_cards, allow_destroy: true
+
   def set_defaults
     self.braintree_sync ||= false
   end
