@@ -11,7 +11,14 @@
 <% flash.each do |name, msg| %>
   <%= content_tag :div, msg, class: name %>
 <% end %>
-<div><%= link_to('home', root_path) %></div>
+
+<div>
+  <%= link_to('home', root_path) %>
+  <%= link_to('customers', customers_path) %>
+  <%= link_to('braintree sandbox', 'https://sandbox.braintreegateway.com/login') %>
+  <%= link_to('new customer', new_customer_path) %>
+</div>
+
 <%= yield %>
 
 </body>

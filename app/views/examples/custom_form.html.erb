@@ -1,5 +1,7 @@
 <%= form_tag('/examples/custom_checkout', id: 'payment-form') do %>
 
+  <p>None of this information is stored locally. The <%= link_to('customers', customers_path) %> example stores locally and in braintree.</p>
+
   <p>The customer fields can NOT be passed to braintree via braintree attribute. I pass these params to braintree
     in the controller via a call to create.</p>
 

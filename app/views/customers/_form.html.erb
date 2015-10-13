@@ -9,13 +9,16 @@
     </ul>
   <% end %>
 
-  <%= f.input :first_name, input_html: { value: @customer.first_name || Faker::Name.first_name } %>
-  <%= f.input :last_name, input_html: { value: @customer.last_name || Faker::Name.last_name } %>
-  <%= f.input :company, input_html: { value: @customer.company|| Faker::Company.name } %>
-  <%= f.input :email, input_html: { value: @customer.email || Faker::Internet.email } %>
-  <%= f.input :phone, input_html: { value: @customer.phone || '555-555-5555' } %>
-  <%= f.input :fax, input_html: { value: @customer.fax || '555-555-5555' } %>
-  <%= f.input :website, input_html: { value: @customer.website || 'www.google.com' } %>
+  <% first_name = Faker::Name.first_name %>
+  <% last_name = Faker::Name.last_name %>
+
+  <%= f.input :first_name, input_html: {value: @customer.first_name || first_name} %>
+  <%= f.input :last_name, input_html: {value: @customer.last_name || last_name} %>
+  <%= f.input :company, input_html: {value: @customer.company|| Faker::Company.name} %>
+  <%= f.input :email, input_html: {value: @customer.email || Faker::Internet.email} %>
+  <%= f.input :phone, input_html: {value: @customer.phone || '555-555-5555'} %>
+  <%= f.input :fax, input_html: {value: @customer.fax || '555-555-5555'} %>
+  <%= f.input :website, input_html: {value: @customer.website || 'www.google.com'} %>
 
   <div>
     <% if current_page?(new_customer_path) %>
@@ -24,10 +27,10 @@
   </div>
 
   <%= f.simple_fields_for :credit_cards do |g| %>
-    <%= g.input :cardholder_name %>
-    <%= g.input :number %>
-    <%= g.input :exp_month %>
-    <%= g.input :exp_year %>
+    <%= g.input :cardholder_name, input_html: {value: "#{first_name} Test #{last_name}" } %>
+    <%= g.input :number, input_html: {value: '6011111111111117'} %>
+    <%= g.input :exp_month, input_html: {value: '12'} %>
+    <%= g.input :exp_year, input_html: {value: '2018'} %>
   <% end %>
 
   <%= f.submit %>
