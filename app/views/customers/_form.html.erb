@@ -26,12 +26,16 @@
     <% end %>
   </div>
 
-  <%= f.simple_fields_for :credit_cards do |g| %>
-    <%= g.input :cardholder_name, input_html: {value: "#{first_name} Test #{last_name}" } %>
-    <%= g.input :number, input_html: {value: '6011111111111117'} %>
-    <%= g.input :exp_month, input_html: {value: '12'} %>
-    <%= g.input :exp_year, input_html: {value: '2018'} %>
-  <% end %>
+  <div class='js-credit_card_form'>
+    <%= f.simple_fields_for :credit_cards do |g| %>
+      <%= g.input :cardholder_name, input_html: {value: "#{first_name} Test #{last_name}"} %>
+      <%= g.input :number, input_html: {value: '1117'} %>
+      <%= g.input :exp_month, input_html: {value: '12'} %>
+      <%= g.input :exp_year, input_html: {value: '2018'} %>
+    <% end %>
+  </div>
+
+  <%= button_tag('Add Another Credit Card', class: 'js-add_credit_card') %>
 
   <%= f.submit %>
 <% end %>
