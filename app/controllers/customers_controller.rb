@@ -12,6 +12,7 @@ class CustomersController < ApplicationController
 
   def new
     @customer = Customer.new
+    @customer.credit_cards.build
   end
 
   def create
@@ -25,7 +26,13 @@ class CustomersController < ApplicationController
       # the braintree success result also returns the customer
 
       if params[:add_to_braintree] == '1'
-        @result = Braintree::Customer.create(customer_params.merge({id: @customer.id}))
+
+        params = customer_params.merge({id: @customer.id})
+        # don't pass in credit cars attributes, they are noe part of braintree customer
+        # need to fix for PCI compliance
+        params.delete(:credit_cards_attributes)
+
+        @result = Braintree::Customer.create(params)
         if @result.success?
           flash[:notice] += 'Customer was successfully created in braintree.'
           @customer.braintree_sync = true
@@ -88,6 +95,7 @@ class CustomersController < ApplicationController
   end
 
   def customer_params
-    params.require(:customer).permit(:first_name, :last_name, :company, :email, :phone, :fax, :website)
+    params.require(:customer).permit(:first_name, :last_name, :company, :email, :phone, :fax, :website,
+    credit_cards_attributes: [:cardholder_name, :number, :exp_month, :exp_year, :_destroy])
   end
 end

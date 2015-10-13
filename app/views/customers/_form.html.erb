@@ -23,5 +23,12 @@
     <% end %>
   </div>
 
+  <%= f.simple_fields_for :credit_cards do |g| %>
+    <%= g.input :cardholder_name %>
+    <%= g.input :number %>
+    <%= g.input :exp_month %>
+    <%= g.input :exp_year %>
+  <% end %>
+
   <%= f.submit %>
 <% end %>

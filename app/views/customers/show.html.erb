@@ -27,5 +27,24 @@
   <dd><%= @customer.website%></dd>
 </dl>
 
+<% @customer.credit_cards.each_with_index do |card, index| %>
+  <dl>
+    <dt>index</dt>
+    <dd><%= index+1 %></dd>
+
+    <dt>cardholder_name</dt>
+    <dd><%= card.cardholder_name %></dd>
+
+    <dt>number</dt>
+    <dd><%= card.number %></dd>
+
+    <dt>exp_month</dt>
+    <dd><%= card.exp_month %></dd>
+
+    <dt>exp_year</dt>
+    <dd><%= card.exp_year %></dd>
+  </dl>
+<% end %>
+
 <%= link_to 'Edit', edit_customer_path %>
 <%= link_to 'Back', customers_path %>
