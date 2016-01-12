@@ -1,6 +1,7 @@
 == README
 
-3 braintree examples. Using braintree dropin plugin, using braintree data-attributes, and the old deprecated orange version.
+3 braintree examples. Simple example using braintree dropin plugin, custom example using braintree data-attributes, and
+old deprecated example using orange version (transparent redirect).
 
 1. Create a braintree sandbox account
 2. Fill in braintree initializer:
