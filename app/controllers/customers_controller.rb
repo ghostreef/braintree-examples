@@ -11,6 +11,7 @@ class CustomersController < ApplicationController
   end
 
   def new
+    @client_token = Braintree::ClientToken.generate
     @customer = Customer.new
     @customer.credit_cards.build
   end

@@ -7,6 +7,8 @@
 
   <p>It's also worth noting fields with braintree attributes do not get sent as params.</p>
 
+  <p>When using braintree attributes a credit card number must include the expiration date or month/year.</p>
+
   <%= field_set_tag('Details (customer object)') do %>
     <%= label_tag('first_name') %>
     <%= text_field_tag('customer[first_name]', 'John-2') %><br/>
