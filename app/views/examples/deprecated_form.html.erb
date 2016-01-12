@@ -1,0 +1,40 @@
+<!-- note the param names are dictated by braintree -->
+<%= form_tag('https://secure.braintreepaymentgateway.com/api/transact.php') do %>
+
+  <!-- 1247307 is the test id -->
+  <%= hidden_field_tag(:key_id, '1247307') %>
+  <%= hidden_field_tag(:amount, '100') %>
+  <%= hidden_field_tag(:time, @time) %>
+  <%= hidden_field_tag(:hash, @hash) %>
+
+  <!-- old version of braintree uses redirects, put your redirect url here, must be absolute url -->
+  <%= hidden_field_tag(:redirect, 'braintree.dev/examples/deprecated_checkout',) %>
+
+  <!-- if you want -->
+  <%#= hidden_field_tag(:customer_vault_id) %>
+
+  <%= label_tag(:cfirstname, 'First Name') %>
+  <%= text_field_tag(:cfirstname, Faker::Name.first_name) %><br/>
+
+  <%= label_tag(:clastname, 'Last Name') %>
+  <%= text_field_tag(:clastname, Faker::Name.last_name) %><br/>
+
+  <%= label_tag(:cemail, 'Email') %>
+  <%= text_field_tag(:cemail, Faker::Internet.email, type: 'email') %><br/>
+
+  <%= label_tag(:cphone, 'Phone') %>
+  <%= text_field_tag(:cphone, Faker::PhoneNumber.phone_number) %><br/>
+
+
+  <%= label_tag(:firstname, 'Name on Credit Card') %>
+  <%= text_field_tag(:firstname, 'John D. Smith') %><br/>
+
+  <%= label_tag(:ccnumber, 'Credit Card Number') %>
+  <%= text_field_tag(:ccnumber, '4111111111111111') %><br/>
+
+  <!-- in the old version of braintree, this is the only date format excepted -->
+  <%= label_tag(:ccexp, 'Expiration Date (in the format %m%y)') %>
+  <%= text_field_tag(:ccexp, '0418') %>
+
+  <%= submit_tag("Checkout") %>
+<% end %>
