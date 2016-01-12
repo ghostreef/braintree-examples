@@ -1,28 +1,12 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+3 braintree examples. Using braintree dropin plugin, using braintree data-attributes, and the old deprecated orange version.
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+1. Create a braintree sandbox account
+2. Fill in braintree initializer:
+    # add your api keys here
+    Braintree::Configuration.environment = :sandbox
+    Braintree::Configuration.merchant_id = ''
+    Braintree::Configuration.public_key = ''
+    Braintree::Configuration.private_key = ''
+3. Checkout project, bundle install, rake, should be good to go
