@@ -3,11 +3,12 @@
 3 braintree examples. Simple example using braintree dropin plugin, custom example using braintree data-attributes, and
 old deprecated example using orange version (transparent redirect).
 
-1. Create a braintree sandbox account
-2. Fill in braintree initializer:
+1. Add braintree gem if you plan on using the blue platform
+2. Create a braintree sandbox account
+3. Fill in braintree initializer:
     # add your api keys here
     Braintree::Configuration.environment = :sandbox
     Braintree::Configuration.merchant_id = ''
     Braintree::Configuration.public_key = ''
     Braintree::Configuration.private_key = ''
-3. Checkout project, bundle install, rake, should be good to go
+4. Checkout project, bundle install, rake, should be good to go
